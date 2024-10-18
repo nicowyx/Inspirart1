@@ -1,0 +1,118 @@
+.container{
+    width: 450px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2) ;
+    padding: 40px;
+    border-radius: 10px;
+    background-image: none;
+    
+}
+
+.container h1{
+    text-align: center;
+    font-size: 30px;
+    color:#fff;
+    background-image: none;
+}
+
+.container .input-field{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px auto;
+    background-image: none;
+}
+
+.input-field input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius : 40px;
+  font-size: 16px ;
+  color: #fff;
+  padding: 20px 45px;
+  background-image: none;
+}
+
+.input-field input::placeholder{
+    color:#fff;
+    background-image: none;
+}
+
+.input-field .icon{
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #fff;
+    background-image: none;
+}
+
+.container .recall-forget{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+    background-image: none;
+}
+
+.recall-forget input {
+    margin-right: 5px;
+    background-image: none;
+}
+
+.recall-forget a, .signup-link p a {
+    color: #fff;
+    text-decoration: none;
+    background-image: none;
+}
+
+.recall-forget a:hover, .signup-link p a{
+    text-decoration: underline;
+    background-image: none;
+}
+
+.container button{
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor:  pointer;
+    font-size: 16px;
+    font-weight: 600;
+    text-shadow: none;
+    background-image: none;
+}
+
+.container .signup-link{
+    font-size: 15px;
+    text-align: center;
+    margin: 20px 0 10px;
+    text-shadow: none;
+    background-image: none;
+}
+
+
+.bg-img{
+    background-image: url(../../assets/img-back.jpeg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    background-position: center;
+}
+
+.input-field{
+    background-image: none;
+}
+.recall-forget{
+    background-image: none;
+}

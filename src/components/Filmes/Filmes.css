@@ -1,0 +1,192 @@
+.allFilmes {
+    margin: 0;
+    padding: 0;
+    background-color: #f9fcf9; /* Fundo verde */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    
+  }
+  
+  .-SCreen {
+    width: 100%; /* Largura ajustada */
+    height: 100%; /* Altura ajustada */
+    background: linear-gradient(to bottom right, #0E0E0E, #ff0000); /* Degradê de preto para Vermelho */
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .-TOp-bar {
+    width: 100%;
+    height: 80px;
+    background-color: #1c1c1c;
+    display: flex;
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center;
+    color: #fff;
+    font-size: 22px;
+    padding: 0 50px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .-TOp-bar .-MEnu-container {
+    display: flex;
+    gap: 50px;
+  }
+  
+  .-TOp-bar .-MEnu-container span {
+    color: #f6f9f6; /* cor das palavras */
+    cursor: pointer;
+    background-color: #ff0000; /* Cor de fundo da palavra */
+    padding: 10px 20px; /* Espaçamento interno */
+    border-radius: 20px; /* Bordas arredondadas */
+    font-size: 18px; /* Ajuste de tamanho da fonte */
+  }
+
+  .-TOp-bar .-MEnu-container span:hover {
+    background-color: #333; /* Cor de fundo ao passar o mouse */
+}
+  
+  .-TOp-bar .-PRofile-button {
+    width: 60px;
+    height: 60px;
+    background: url('../../assets/img-1.jpeg') no-repeat center center;
+    background-size: cover;
+    border-radius: 50%;
+    position: absolute;
+    left: 50px; /* Espaçamento à esquerda para o perfil */
+    cursor: pointer;
+  }
+  
+  .-MEnu {
+    display: none;
+    position: absolute;
+    top: 80px; /* Alinha com a barra superior */
+    left: 0;
+    width: 200px;
+    background-color: #1c1c1c;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+  
+  .-MEnu.show {
+    display: block;
+  }
+  
+  .-MEnu a {
+    display: block;
+    padding: 12px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    border-bottom: 1px solid #333;
+    transition: background-color 0.3s ease; /* Transição suave de cor */
+  }
+  
+  .-MEnu a:nth-child(1):hover {
+    background-color: #00FF00; /* Verde */
+  }
+  
+  .-MEnu a:nth-child(2):hover {
+    background-color: #0000FF; /* Azul */
+  }
+  
+  .-MEnu a:nth-child(3):hover {
+    background-color: #FF0000; /* Vermelho */
+  }
+  
+  .-MEnu a:nth-child(4):hover {
+    background-color: #FFFF00; /* Amarelo */
+  }
+  
+  .-MEnu a:nth-child(5):hover {
+    background-color: #00ff9d; /* verde */
+  }
+
+  .-MEnu a:nth-child(6):hover {
+    background-color: #531bad; /* roxo */
+  }
+  
+  .-VIdeo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 25px;
+    padding: 90px 50px 50px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 80px;
+    bottom: 80px;
+    left: 50px;
+    right: 50px;
+   
+  }
+  
+  .-VIdeo {
+    width: 100%;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .-VIdeo::before {
+    content: '';
+    display: block;
+    padding-top: 56.25%; /* Proporção 16:9 */
+  }
+  
+  .-VIdeo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .-VIdeo-icons {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .-VIdeo-icons div {
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer; /* Adiciona um cursor de ponteiro */
+  }
+  
+  .-BOttom-bar {
+    width: 100%;
+    height: 80px;
+    background-color: #1c1c1c;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #888;
+    font-size: 36px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .-BOttom-bar i {
+    color: #888; /* Cor dos ícones */
+  }
+
+  .-URl{
+    background-image: url(../../assets/img-back.jpeg);
+  }

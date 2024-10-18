@@ -1,0 +1,673 @@
+/* Estilos gerais */
+.all {
+  margin: 0;
+  padding: 0;
+  background-color: #f9fcf9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #000, #3d2863);
+  position: relative;
+  overflow: hidden;
+}
+
+.top-bar {
+  width: 100%;
+  height: 80px;
+  background-color: #1c1c1c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 22px;
+  padding: 0 50px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.top-bar .menu-container {
+  display: flex;
+  gap: 50px;
+}
+
+.top-bar .menu-container span {
+  color: #f6f9f6;
+}
+
+.top-bar .profile-button {
+  width: 60px;
+  height: 60px;
+  background: url('../../assets/img-1.jpeg') no-repeat center center;
+  background-size: cover;
+  border-radius: 50%;
+  position: absolute;
+  left: 50px;
+  cursor: pointer;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 200px;
+  background-color: #1c1c1c;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.menu.show {
+  display: block;
+}
+
+.menu a {
+  display: block;
+  padding: 12px 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  border-bottom: 1px solid #333;
+  transition: background-color 0.3s ease;
+}
+
+.menu a:hover {
+  background-color: #333;
+}
+
+
+
+
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 25px;
+  padding: 90px 50px 50px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 80px;
+  bottom: 80px;
+  left: 50px;
+  right: 50px;
+}
+
+.video {
+  width: 100%;
+  background-color: #2a2a2a;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.3s ease; /* Adicionado para efeito de zoom */
+}
+
+.video:hover {
+  transform: scale(1.05); /* Aumenta a imagem em 5% */
+}
+
+.video::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%;
+}
+
+.video img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease; /* Adicionado para efeito de zoom na imagem */
+}
+
+.video:hover img {
+  transform: scale(1.1); /* Aumenta a imagem em 10% */
+}
+
+.video-icons {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.video-icons div {
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.video-icons div:hover {
+  transform: scale(1.2);
+}
+
+.bottom-bar {
+  width: 100%;
+  height: 80px;
+  background-color: #1c1c1c;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #888;
+  font-size: 36px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.bottom-bar svg {
+  color: #888;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.bottom-bar svg:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+/* Estilos dos modais */
+.modal-content {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.modal-header h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.modal-close {
+  cursor: pointer;
+  font-size: 28px;
+  color: #333;
+}
+
+.modal-close:hover {
+  color: #ff0000;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-footer button {
+  background-color: #3d2863;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-footer button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Estilos específicos do modal de notificações */
+.notification-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.notification-modal.show {
+  display: block;
+}
+
+.notification-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.notification-modal .modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.notification-modal .modal-header .modal-close {
+  font-size: 28px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.notification-modal .modal-header .modal-close:hover {
+  color: #007bff;
+}
+
+.notification-modal .modal-content {
+  margin-bottom: 15px;
+}
+
+.notification-modal .notification-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
+}
+
+.notification-modal .notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-modal .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+.notification-modal .modal-footer button {
+  background-color: #3d2863;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.notification-modal .modal-footer button:hover {
+  background-color: #3d2863;
+}
+
+/* Estilos específicos do modal de busca */
+.search-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.search-modal.show {
+  display: block;
+}
+
+.search-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.search-modal .modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.search-modal .modal-header .modal-close {
+  font-size: 28px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.search-modal .modal-header .modal-close:hover {
+  color: #3d2863;
+}
+
+.search-modal .modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-modal .modal-content input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+.search-modal .modal-content input:focus {
+  border-color: #3d2863;
+  outline: none;
+}
+
+.search-modal .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+.search-modal .modal-footer button {
+  background-color: #3d2863;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.search-modal .modal-footer button:hover {
+  background-color: #3d2863;
+}
+
+
+
+
+
+
+
+
+/* Estilos específicos do modal de publicação */
+.publication-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.publication-modal.show {
+  display: block;
+}
+
+.publication-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.publication-modal .modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.publication-modal .modal-close {
+  cursor: pointer;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.publication-modal .modal-close:hover {
+  color: #ff0000;
+}
+
+.publication-modal .modal-content {
+  margin-bottom: 15px;
+}
+
+.publication-modal .modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.publication-modal .modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.publication-modal .modal-content input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.publication-modal .publication-list {
+  margin-top: 20px;
+}
+
+.publication-modal .publication-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.publication-modal .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.publication-modal .modal-footer button {
+  background-color: #3d2863;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.publication-modal .modal-footer button:hover {
+  background-color: #3d2863;
+}
+
+/* Estilos específicos do modal de comunidade */
+/* Estilos gerais do modal */
+.community-modal {
+  display: none; /* Mantém oculto por padrão */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  background: #ffffff; /* Fundo branco */
+  padding: 20px; /* Padding consistente */
+  border-radius: 12px; /* Bordas suaves */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Sombra suave */
+  z-index: 1000;
+  overflow-y: auto; /* Permite scroll */
+  transition: opacity 0.3s ease; /* Transição suave para opacidade */
+}
+
+/* Exibe o modal */
+.community-modal.show {
+  display: block; /* Exibe quando ativo */
+  opacity: 1; /* Opacidade total ao exibir */
+}
+
+/* Estilos do cabeçalho do modal */
+.community-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 15px;
+}
+
+.community-modal .modal-header h2 {
+  margin: 0;
+  font-size: 28px; /* Tamanho de fonte aumentado para destaque */
+  color: #3d2863; /* Cor do texto */
+  font-weight: 600; /* Peso de fonte para destaque */
+}
+
+/* Botão de fechamento */
+.community-modal .modal-close {
+  cursor: pointer;
+  font-size: 28px; /* Tamanho do botão */
+  color: #3d2863;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.community-modal .modal-close:hover {
+  color: #4dff47; /* Cor ao passar o mouse */
+  transform: scale(1.1); /* Efeito de aumento */
+}
+
+/* Estilos dos grupos de botões */
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Espacialização uniforme */
+  margin: 20px 0; /* Margem superior e inferior */
+}
+
+.button-group button {
+  background: #3d2863; /* Cor de fundo */
+  color: #ffffff; /* Cor do texto */
+  border: none;
+  border-radius: 6px; /* Bordas mais suaves */
+  padding: 12px 20px; /* Espaçamento interno */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
+  flex: 1; /* Para ocupar o espaço disponível */
+  margin: 0 5px; /* Margens entre os botões */
+}
+
+.button-group button:hover {
+  background: #5b4b8a; /* Cor ao passar o mouse */
+  transform: translateY(-2px); /* Efeito de elevação */
+}
+
+/* Estilos da lista de comunidade */
+.community-list {
+  list-style: none; /* Remove marcadores */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margens */
+}
+
+.community-list li {
+  display: flex; /* Flexbox para layout */
+  align-items: center; /* Centraliza verticalmente */
+  padding: 15px; /* Espaçamento interno */
+  border-bottom: 1px solid #e0e0e0; /* Linha inferior */
+  transition: background-color 0.3s ease; /* Transição suave de fundo */
+}
+
+.community-list li:hover {
+  background-color: #f7f7f7; /* Fundo suave ao passar o mouse */
+}
+
+/* Estilos das informações do grupo e amigo */
+.group-info, .friend-info {
+  display: flex; /* Flexbox para layout */
+  align-items: center; /* Centraliza verticalmente */
+}
+
+.group-info img, .friend-info img {
+  width: 50px; /* Tamanho da imagem */
+  height: 50px; /* Tamanho da imagem */
+  border-radius: 50%; /* Canto arredondado */
+  margin-right: 15px; /* Espaçamento à direita */
+  border: 2px solid #3d2863; /* Borda ao redor da imagem */
+  transition: transform 0.3s ease; /* Transição suave */
+}
+
+.group-info img:hover, .friend-info img:hover {
+  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+}
+
+/* Detalhes do grupo e amigo */
+.group-details, .friend-details {
+  margin-left: 15px; /* Margem esquerda */
+}
+
+.group-details p, .friend-details p {
+  margin: 0; /* Remove margens */
+  font-weight: 500; /* Peso do texto */
+  color: #333; /* Cor do texto */
+}
+
+/* Links dos detalhes */
+.group-details a, .friend-details a {
+  color: #3d2863; /* Cor do link */
+  text-decoration: none; /* Remove sublinhado */
+  font-weight: 600; /* Peso do texto */
+  transition: color 0.3s ease; /* Transição suave de cor */
+}
+
+.group-details a:hover, .friend-details a:hover {
+  text-decoration: underline; /* Sublinhado ao passar o mouse */
+  color: #f347ff; /* Cor ao passar o mouse */
+}
+
+
+
+/* Animação de Fade-In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
