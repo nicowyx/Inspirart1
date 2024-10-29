@@ -136,18 +136,35 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-  }
+  transition: transform 0.3s ease; /* Adicionado para efeito de zoom */
+}
+
+.video:hover {
+  transform: scale(1.05); /* Aumenta a imagem em 5% */
+}
+
+.-VIdeo::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%;
+}
+
+.-VIdeo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease; /* Adicionado para efeito de zoom na imagem */
+}
+
+.-VIdeo:hover img {
+  transform: scale(1.1); /* Aumenta a imagem em 10% */
+}
+
   
   .-VIdeo::before {
     content: '';
     display: block;
     padding-top: 56.25%; /* Proporção 16:9 */
-  }
-  
-  .-VIdeo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
   
   .-VIdeo-icons {

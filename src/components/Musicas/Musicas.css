@@ -136,7 +136,30 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-  }
+  transition: transform 0.3s ease; /* Adicionado para efeito de zoom */
+}
+
+.-VIDEo:hover {
+  transform: scale(1.05); /* Aumenta a imagem em 5% */
+}
+
+.-VIDEo::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%;
+}
+
+.-VIDEo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease; /* Adicionado para efeito de zoom na imagem */
+}
+
+.-VIDEo:hover img {
+  transform: scale(1.1); /* Aumenta a imagem em 10% */
+}
+
   
   .-VIDEo::before {
     content: '';
@@ -144,11 +167,6 @@
     padding-top: 56.25%; /* Proporção 16:9 */
   }
   
-  .-VIDEo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
   
   .-VIDEo-icons {
     display: flex;

@@ -1,6 +1,7 @@
 import { FaUser, FaLock } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Importação do axios
 import "./Login2.css";
 
 function Login2() {
@@ -8,17 +9,32 @@ function Login2() {
     const [username, setUsername] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
-    const [userType, setUserType] = useState("normal"); // Tipo de usuário
+    const [userType, setUserType] = useState("normal");
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        alert("Enviando os Dados: " + name + ", " + username + ", " + phone + ", " + password + ", Tipo: " + userType);
-        handleNavigate();
-    };
 
-    const handleNavigate = () => {
-        navigate('/Home');
+        // Dados a serem enviados para o backend
+        const newUser = {
+            name,
+            email: username,
+            phone,
+            password,
+            userType
+        };
+
+        try {
+            // Envio da requisição de cadastro para o backend
+            const response = await axios.post("http://localhost:8080/usuarios", newUser);
+            if (response.status === 200) {
+                alert("Usuário cadastrado com sucesso!");
+                navigate('/Home');
+            }
+        } catch (error) {
+            alert("Erro ao cadastrar usuário.");
+            console.error("Erro:", error);
+        }
     };
 
     return (
@@ -26,7 +42,7 @@ function Login2() {
             <div className="container">
                 <form onSubmit={handleSubmit}>
                     <h1>Cadastrar</h1>
-                    
+
                     <div className="input-field">
                         <input 
                             type="text" 
@@ -44,16 +60,15 @@ function Login2() {
                         />
                         <FaUser className="icon" />
                     </div>
-                    
+
                     <div className="input-field">
                         <input 
-                            type="tel" 
+                            type="text" 
                             placeholder='Telefone' 
                             onChange={(e) => setPhone(e.target.value)} 
                         />
-                        <FaUser className="icon" />
                     </div>
-                    
+
                     <div className="input-field">
                         <input 
                             type="password" 
@@ -63,29 +78,26 @@ function Login2() {
                         <FaLock className="icon" />
                     </div>  
 
-                  {/* Opção de tipo de usuário */}
-<div className="user-type">
-  
-    <label className={`user-option ${userType === "normal" ? "selected" : ""}`}>
-        <input 
-            type="radio" 
-            value="normal" 
-            checked={userType === "normal"} 
-            onChange={() => setUserType("normal")} 
-        />
-        Usuário Normal
-    </label>
-    <label className={`user-option ${userType === "vip" ? "selected" : ""}`}>
-        <input 
-            type="radio" 
-            value="vip" 
-            checked={userType === "vip"} 
-            onChange={() => setUserType("vip")} 
-        />
-        Usuário Artista
-    </label>
-</div>
-
+                    <div className="user-type">
+                        <label className={`user-option ${userType === "normal" ? "selected" : ""}`}>
+                            <input 
+                                type="radio" 
+                                value="normal" 
+                                checked={userType === "normal"} 
+                                onChange={() => setUserType("normal")} 
+                            />
+                            Usuário Normal
+                        </label>
+                        <label className={`user-option ${userType === "vip" ? "selected" : ""}`}>
+                            <input 
+                                type="radio" 
+                                value="vip" 
+                                checked={userType === "vip"} 
+                                onChange={() => setUserType("vip")} 
+                            />
+                            Usuário Artista
+                        </label>
+                    </div>
 
                     <div className="recall-forget">
                         <label>
@@ -96,10 +108,6 @@ function Login2() {
                     </div>
                     
                     <button type="submit">Cadastrar</button>
-
-                    <div className="signup-link">
-                          
-                    </div> 
                 </form>
             </div>
         </div>

@@ -1,82 +1,79 @@
-import {FaUser, FaLock} from "react-icons/fa";
+import { FaUser, FaLock } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios'; // Para fazer a requisição ao backend
 import "./Login.css";
 
-function Login () {
+function Login() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const [username, setUsername] = useState("")
-     const [password, setPassword] = useState("")
-
-     function handleSubmit ()  {
+    // Função de autenticação
+    async function handleSubmit(event) {
         event.preventDefault();
-        
-        alert("Enviando os Dados:" + username + " - " + password);
-     };
 
+        try {
+            // Envia os dados de login para a API
+            const response = await axios.post("http://localhost:8080/usuarios/login", {
+                email: username,
+                senha: password
+            });
 
+            // Verifica se o login foi bem-sucedido
+            if (response.status === 200) {
+                alert("Login bem-sucedido!");
+                navigate('/Home'); // Redireciona para a página inicial
+            }
+        } catch (error) {
+            alert("Erro no login: Verifique suas credenciais.");
+            console.error("Erro de autenticação:", error);
+        }
+    }
 
+    return (
+        <div className="bg-img">
+            <div className="container">
+                <form onSubmit={handleSubmit}>
+                    <h1>Acesse o sistema</h1>
 
-  {/*navegaçao entre as paginas atraves do botao*/}
-  const navigate = useNavigate();
+                    <div className="input-field">
+                        <input
+                            type="email"
+                            placeholder='Email'
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                        <FaUser className="icon" />
+                    </div>
 
-  const handleNavigate = () => {
-    navigate('/Home');
-  };
+                    <div className="input-field">
+                        <input
+                            type="password"
+                            placeholder='Password'
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <FaLock className="icon" />
+                    </div>
 
+                    <div className="recall-forget">
+                        <label>
+                            <input type="checkbox" />
+                            Lembre de mim
+                        </label>
+                        <a href="#">Esqueceu a senha?</a>
+                    </div>
 
-  
-  {/*funçao criada para o botao conseguir fazer as duas coisas ao mesmo tempo*/}
-  const chamarAmbasFuncoes = () =>{
-     handleSubmit();
-     handleNavigate();
-  }
+                    <button type="submit">Entrar</button>
 
-
-  return (
-    <div className="bg-img">
-    <div className="container">
-        <form onSubmit={handleSubmit}>
-            <h1>Acesse o sistema</h1>
-            
-            <div className="input-field">
-                <input type="email" placeholder='Email' 
-                onChange={(e) => setUsername(e.target.value)}/>
-                <FaUser className="icon"/>
+                    <div className="signup-link">
+                        <p>Não tem uma conta? <a href="Login2">Registrar</a></p>
+                    </div>
+                </form>
             </div>
-            
-            <div className="input-field">
-                <input type="password" placeholder='Password' 
-                onChange={(e) => setPassword(e.target.value)} />
-                <FaLock className="icon"/>
-            </div>  
-
-            <div className="recall-forget">
-                <label>
-                    <input type="checkbox" />
-                    Lembre de mim
-                </label>
-                <a href="#">Esqueceu a senha?</a>
-            </div>
-            
-            {/*Botao "Entrar", linkado com a página 'Home'*/}
-            <button onClick={chamarAmbasFuncoes}>Entrar</button> 
-
-            <div className="signup-link">
-                 <p>
-                     Nao tem uma conta? <a href="Login2">Registrar</a>    
-                     </p>
-                   
-
-            </div> 
-
-            
-                  
-        </form>
-    </div>
-    </div>
-  )
+        </div>
+    );
 }
 
-export default Login
+export default Login;
