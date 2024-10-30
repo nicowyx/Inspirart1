@@ -1,86 +1,111 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../Perfil/Perfil.css'; // Importando o CSS
-import { FaHome, FaPlus, FaComments } from "react-icons/fa";
-import { CiSearch, CiBellOn } from "react-icons/ci";
-import img1 from '../../assets/img-1.jpeg';
-import img2 from '../../assets/img-2.jpeg';
-import img3 from '../../assets/img-3.jpeg';
-import img4 from '../../assets/img-4.jpeg';
-import img5 from '../../assets/img-5.jpeg';
-import img6 from '../../assets/img-6.jpeg';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import '../Perfil/Perfil.css';
 
 function Perfil() {
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const navigate = useNavigate();
+    const [userData, setUserData] = useState({
+        idUsuario: null,
+        nome: '',
+        email: '',
+        senha: '',
+        bio: '', // Inicializa com string vazia
+    });
 
-  const images = [img1, img2, img3, img4, img5, img6];
+    useEffect(() => {
+        const storedUserData = JSON.parse(localStorage.getItem('usuarioLogado'));
+        if (storedUserData && storedUserData.idUsuario) {
+            loadUserData(storedUserData.idUsuario);
+        } else {
+            alert('Nenhum usuário logado encontrado. Você será redirecionado para a página de login.');
+            navigate('/');
+        }
+    }, [navigate]);
 
-  const toggleMenu = () => {
-    setIsMenuVisible(!isMenuVisible);
-  };
+    const loadUserData = async (userId) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/usuarios/${userId}`);
+            // Garante que todos os campos do usuário estão definidos
+            setUserData({
+                idUsuario: response.data.idUsuario || null,
+                nome: response.data.nome || '',
+                email: response.data.email || '',
+                senha: response.data.senha || '',
+                bio: response.data.bio || '', // Define como string vazia se for undefined
+            });
+        } catch (error) {
+            console.error('Erro ao carregar as informações do usuário:', error);
+            alert('Erro ao carregar as informações do usuário.');
+        }
+    };
 
-  const showMessage = (action) => {
-    alert('Você clicou em ' + action);
-  };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
 
-  return (
-    <div className='all'>
-      <div className="screen">
-        <div className="top-bar">
-          <div className="Perfil-button"></div>
-          <div className="menu-container">
-            {/* Adicione aqui o conteúdo do menu, se necessário */}
-          </div>
-        </div>
+    const handleSave = async () => {
+        try {
+            if (userData.idUsuario) {
+                const response = await axios.put(`http://localhost:8080/usuarios/${userData.idUsuario}`, userData);
+                localStorage.setItem('usuarioLogado', JSON.stringify(response.data));
+                alert('Perfil atualizado com sucesso!');
+            } else {
+                alert('Erro ao carregar as informações do usuário. ID do usuário não encontrado.');
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar perfil:', error);
+            alert('Erro ao atualizar perfil.');
+        }
+    };
 
-        <div className='user'>
-          <div className='content-user'>
-            <h1>
-              <strong>Bio:</strong><br />
-              <hr />
-              Inverso<br />
-              Artista<br />
-              TACA TINTA NESSE CINZA<br />
-              SP/ZO 📍<br />
-              Disponível para:<br />
-              Encomendas | Grafite/muralismo | Design<br />
-              Contato: 11974461940
-            </h1>
-            <div className='publicacao'>
-              <div className='content-publicacao'>
-                <span>Publicações</span>
-                <hr />
-                <div className="video-grid">
-                  {images.map((url, index) => (
-                    <div className="video" key={index}>
-                      <img 
-                        src={url} 
-                        alt={`Imagem ${index + 1}`} 
-                        style={{ width: '480px', height: '270px' }} 
-                      />
-                      <div className="video-icons">
-                        <div onClick={() => showMessage('Comunidade')}>👥</div>
-                        <div onClick={() => showMessage('Curtir')}>❤️</div>
-                        <div onClick={() => showMessage('Seguir')}>⭐</div>
-                      </div>
+    const handleDelete = async () => {
+        try {
+            if (userData.idUsuario) {
+                await axios.delete(`http://localhost:8080/usuarios/${userData.idUsuario}`);
+                alert('Usuário deletado com sucesso.');
+                localStorage.removeItem('usuarioLogado');
+                navigate('/');
+            } else {
+                alert('Erro ao deletar usuário. ID do usuário não encontrado.');
+            }
+        } catch (error) {
+            console.error('Erro ao deletar usuário:', error.response ? error.response.data : error.message);
+            alert('Erro ao deletar usuário: ' + (error.response && error.response.data ? error.response.data : error.message));
+        }
+    };
+
+    return (
+        <div className='perfil'>
+            <div className="perfil-container">
+                <h2>Meu Perfil</h2>
+                <div className="perfil-info">
+                    <div className="info-item">
+                        <label>Nome:</label>
+                        <input type="text" name="nome" value={userData.nome || ''} onChange={handleChange} />
                     </div>
-                  ))}
+                    <div className="info-item">
+                        <label>Email:</label>
+                        <input type="email" name="email" value={userData.email || ''} onChange={handleChange} />
+                    </div>
+                    <div className="info-item">
+                        <label>Senha:</label>
+                        <input type="password" name="senha" value={userData.senha || ''} onChange={handleChange} />
+                    </div>
+                    <div className="info-item">
+                        <label>Bio:</label>
+                        <textarea name="bio" value={userData.bio || ''} onChange={handleChange} />
+                    </div>
+                    <button className="save-button" onClick={handleSave}>Salvar Alterações</button>
+                    <button className="save-button" onClick={handleDelete} style={{ backgroundColor: '#dc3545', marginTop: '10px' }}>Deletar Conta</button>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-
-        <div className="bottom-bar">
-          <Link to="/Home"><FaHome /></Link>
-          <CiSearch />
-          <FaPlus />
-          <CiBellOn />
-          <FaComments />
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Perfil;

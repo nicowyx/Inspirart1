@@ -1,7 +1,7 @@
+import React, { useState } from 'react';
 import { FaUser, FaLock } from "react-icons/fa";
-import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Para fazer a requisição ao backend
+import axios from 'axios';
 import "./Login.css";
 
 function Login() {
@@ -22,8 +22,10 @@ function Login() {
 
             // Verifica se o login foi bem-sucedido
             if (response.status === 200) {
+                console.log("Dados do usuário:", response.data); // Adicione este log
+                localStorage.setItem('usuarioLogado', JSON.stringify(response.data)); // Salva os dados do usuário no localStorage
                 alert("Login bem-sucedido!");
-                navigate('/Home'); // Redireciona para a página inicial
+                navigate('/home'); // Redireciona para a página inicial
             }
         } catch (error) {
             alert("Erro no login: Verifique suas credenciais.");
@@ -36,7 +38,6 @@ function Login() {
             <div className="container">
                 <form onSubmit={handleSubmit}>
                     <h1>Acesse o sistema</h1>
-
                     <div className="input-field">
                         <input
                             type="email"
@@ -68,7 +69,7 @@ function Login() {
                     <button type="submit">Entrar</button>
 
                     <div className="signup-link">
-                        <p>Não tem uma conta? <a href="Login2">Registrar</a></p>
+                        <p>Não tem uma conta? <a href="/login2">Registrar</a></p>
                     </div>
                 </form>
             </div>

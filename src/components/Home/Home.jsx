@@ -11,8 +11,12 @@ import { FaHome, FaUserFriends, FaUsers, FaUser } from "react-icons/fa";
 import { CiSearch, CiBellOn } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa";
 import { FaComments } from "react-icons/fa";
+import { useLocation } from 'react-router-dom';
 
 function Home() {
+  const location = useLocation();
+  const pathSegments = location.pathname.split('/').slice(2); // Ignora "home" na URL
+
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isPostVisible, setIsPostVisible] = useState(false);

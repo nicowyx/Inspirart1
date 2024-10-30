@@ -1,39 +1,47 @@
 import { FaUser, FaLock } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Importação do axios
+import axios from 'axios';
 import "./Login2.css";
 
 function Login2() {
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
-    const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [userType, setUserType] = useState("normal");
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // Dados a serem enviados para o backend
+        
+        console.log("Nome:", name);  // Verifique o valor do nome aqui
+    
         const newUser = {
-            name,
+            nome: name, // Use 'nome' ao invés de 'name' para corresponder ao modelo
             email: username,
-            phone,
-            password,
+            senha: password,
             userType
         };
 
         try {
-            // Envio da requisição de cadastro para o backend
             const response = await axios.post("http://localhost:8080/usuarios", newUser);
-            if (response.status === 200) {
+            if (response.status === 201) {
                 alert("Usuário cadastrado com sucesso!");
-                navigate('/Home');
+                navigate('/');
             }
         } catch (error) {
-            alert("Erro ao cadastrar usuário.");
+            // Logando o erro completo
             console.error("Erro:", error);
+            if (error.response) {
+                console.error("Dados do erro do servidor:", error.response.data);
+                alert("Erro ao cadastrar usuário: " + (error.response.data.message || error.response.data));
+            } else if (error.request) {
+                console.error("Erro na requisição:", error.request);
+                alert("Erro ao cadastrar usuário: Não houve resposta do servidor.");
+            } else {
+                console.error("Erro ao configurar a requisição:", error.message);
+                alert("Erro ao cadastrar usuário: " + error.message);
+            }
         }
     };
 
@@ -47,7 +55,9 @@ function Login2() {
                         <input 
                             type="text" 
                             placeholder='Nome' 
+                            value={name}              
                             onChange={(e) => setName(e.target.value)} 
+                            required
                         />
                         <FaUser className="icon" />
                     </div>
@@ -56,24 +66,20 @@ function Login2() {
                         <input 
                             type="email" 
                             placeholder='Email' 
+                            value={username}          
                             onChange={(e) => setUsername(e.target.value)} 
+                            required
                         />
                         <FaUser className="icon" />
                     </div>
 
                     <div className="input-field">
                         <input 
-                            type="text" 
-                            placeholder='Telefone' 
-                            onChange={(e) => setPhone(e.target.value)} 
-                        />
-                    </div>
-
-                    <div className="input-field">
-                        <input 
                             type="password" 
                             placeholder='Senha' 
+                            value={password}          
                             onChange={(e) => setPassword(e.target.value)} 
+                            required
                         />
                         <FaLock className="icon" />
                     </div>  
@@ -107,7 +113,7 @@ function Login2() {
                         <a href="#">Esqueceu a senha?</a>
                     </div>
                     
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit" >Cadastrar</button>
                 </form>
             </div>
         </div>
