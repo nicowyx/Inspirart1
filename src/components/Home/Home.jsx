@@ -216,7 +216,7 @@ function Home() {
                       <p key={index}>{notification}</p>
                     ))
                   ) : (
-                    <p>Você não tem novas notificações.</p>
+                    <p>Parece que você não tem novas notificações no momento. Volte mais tarde.</p>
                   )}
                 </>
               )}
